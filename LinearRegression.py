@@ -3,6 +3,9 @@ import numpy as np
 import sklearn
 from sklearn import linear_model
 from sklearn.utils import shuffle
+import matplotlib.pyplot as pyplot
+from matplotlib import style
+import pickle
 
 data = pd.read_csv("Datasets/student/student-mat.csv", sep=";")
 # Since our data is separated by semicolons we need to do sep=";"
@@ -16,11 +19,19 @@ y = np.array(data[predict])  # Labels
 
 x_train, x_test, y_train, y_test = sklearn.model_selection.train_test_split(X, y, test_size=0.1)
 
-linear = linear_model.LinearRegression()
+"""linear = linear_model.LinearRegression()
 
 linear.fit(x_train, y_train)
 acc = linear.score(x_test, y_test)  # acc = accuracy
 print(acc)
+
+# Saving our model using pickle
+with open("studentModel.pickle", "wb") as f:
+    pickle.dump(linear, f)"""
+
+# Loading our model
+pickle_in = open("studentModel.pickle", "rb")
+linear = pickle.load(pickle_in)
 
 print('Coeficient: \n', linear.coef_)  # slope value
 print('Intercept: \n', linear.intercept_)  # intercept
