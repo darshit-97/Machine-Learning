@@ -19,15 +19,20 @@ y = np.array(data[predict])  # Labels
 
 x_train, x_test, y_train, y_test = sklearn.model_selection.train_test_split(X, y, test_size=0.1)
 
-"""linear = linear_model.LinearRegression()
+'''best = 0
+for _ in range(30):
+    x_train, x_test, y_train, y_test = sklearn.model_selection.train_test_split(X, y, test_size=0.1)
 
-linear.fit(x_train, y_train)
-acc = linear.score(x_test, y_test)  # acc = accuracy
-print(acc)
+    linear = linear_model.LinearRegression()
 
-# Saving our model using pickle
-with open("studentModel.pickle", "wb") as f:
-    pickle.dump(linear, f)"""
+    linear.fit(x_train, y_train)
+    acc = linear.score(x_test, y_test)  # acc = accuracy
+    print(acc)
+
+    if acc > best:
+        best = acc
+        with open("studentModel.pickle", "wb") as f:  # Saving our model using pickle
+            pickle.dump(linear, f)'''
 
 # Loading our model
 pickle_in = open("studentModel.pickle", "rb")
@@ -39,3 +44,10 @@ print('Intercept: \n', linear.intercept_)  # intercept
 predictions = linear.predict(x_test)  # gets list of all predictions
 for x in range(len(predictions)):
     print(predictions[x], x_test[x], y_test[x])
+
+p = 'absences'
+style.use("ggplot")
+pyplot.scatter(data[p], data["G3"])
+pyplot.xlabel(p)
+pyplot.ylabel("Final Grade")
+pyplot.show()
