@@ -19,6 +19,8 @@ y = np.array(data[predict])  # Labels
 
 x_train, x_test, y_train, y_test = sklearn.model_selection.train_test_split(X, y, test_size=0.1)
 
+
+# Training model for multiple times to get the best score
 '''best = 0
 for _ in range(30):
     x_train, x_test, y_train, y_test = sklearn.model_selection.train_test_split(X, y, test_size=0.1)
@@ -34,7 +36,7 @@ for _ in range(30):
         with open("studentModel.pickle", "wb") as f:  # Saving our model using pickle
             pickle.dump(linear, f)'''
 
-# Loading our model
+# Load model
 pickle_in = open("studentModel.pickle", "rb")
 linear = pickle.load(pickle_in)
 
@@ -45,6 +47,8 @@ predictions = linear.predict(x_test)  # gets list of all predictions
 for x in range(len(predictions)):
     print(predictions[x], x_test[x], y_test[x])
 
+
+# Plotting our model to graph
 p = 'absences'
 style.use("ggplot")
 pyplot.scatter(data[p], data["G3"])
